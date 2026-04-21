@@ -1,7 +1,7 @@
 # Adding New Machines to an Existing Site
 
 This guide is intended to cover some of the basic things you should check to get a machine into a
-a basic state where it can be discovered by Forge auto-ingestion.
+a basic state where it can be discovered by NICo auto-ingestion.
 
 Some of the configuration items that should be considered which could potentially cause issues:
 
@@ -141,7 +141,7 @@ Log on to the DPU ARM OS and attempt to run the following command:
 sudo mlxfwmanager --query -d /dev/mst/*_pciconf0
 ```
 
-For Bluefield 2 DPUs you should expect the output similar to the following:
+For BlueField 2 DPUs you should expect the output similar to the following:
 
 ```text
 Querying Mellanox devices firmware ...
@@ -166,7 +166,7 @@ Device #1:
 
 ```
 
-For Bluefield 3 DPUs you should expect the output similar to the following:
+For BlueField 3 DPUs you should expect the output similar to the following:
 
 ```text
 Querying Mellanox devices firmware ...
@@ -190,9 +190,9 @@ Device Type:      BlueField3
   Status:           No matching image found
 ```
 
-### Checking Bluefield Firmware Versions
+### Checking BlueField Firmware Versions
 
-To check the current Bluefield firmware versions installed on a DPU:
+To check the current BlueField firmware versions installed on a DPU:
 
 1. Log into the staging server for the site
 2. Set up IP, password and token environment variables:
@@ -205,7 +205,7 @@ To check the current Bluefield firmware versions installed on a DPU:
 
 3. Check the current DPU BMC Firmware Versions:
 
-    Bluefield 2 DPUs:
+    BlueField 2 DPUs:
 
     ```bash
     curl -k -H "X-Auth-Token: $BMCTOKEN" -X GET https://$DPUBMCIP/redfish/v1/UpdateService/FirmwareInventory
@@ -214,36 +214,24 @@ To check the current Bluefield firmware versions installed on a DPU:
     curl -k -H "X-Auth-Token: $BMCTOKEN" -X GET https://$DPUBMCIP/redfish/v1/UpdateService/FirmwareInventory/<firmware_id>_BMC_Firmware | jq -r ' .Version'
     ```
 
-    Bluefield 3 DPUs:
+    BlueField 3 DPUs:
 
     ```bash
     curl -ks -H "X-Auth-Token: $BMCTOKEN" -X GET https://$DPUBMCIP/redfish/v1/UpdateService/FirmwareInventory/BMC_Firmware | jq -r ' .Version'
     ```
 
-### Updating the Bluefield Firmware Versions
+### Updating the BlueField Firmware Versions
 
-***Note:*** If discovery is failing due to the firmware revision being too low, confirm with Forge Dev team what version you should update to before proceeding
+***Note:*** If discovery is failing due to the firmware revision being too low, confirm with the NICo team what version you should update to before proceeding
 
-DPU Firmware versions can be downloaded from the following locations:
+DPU firmware packages are available from the NVIDIA DOCA download portal (requires NVIDIA developer account access).
+Confirm the required firmware version with the NICo team for your specific deployment before proceeding.
 
-- BF2: [BF2 BMC Firmware release](https://confluence.nvidia.com/display/SW/BF2+BMC+Firmware+release)
-- BF3: [BF3 BMC Firmware release](https://confluence.nvidia.com/display/SW/BF3+BMC+Firmware+release)
+1. Download the relevant firmware package for your DPU type from the NVIDIA DOCA download portal and copy it to the staging server:
 
-For the examples below, we are installing FW version 24.01-5, but confirm this with Forge Development team for your specific install before proceeding
+    BlueField 2: download the `bf2-bmc-ota-<version>-opn.tar` package
 
-1. Download the relevant packages for your DPU type:
-
-    Bluefield 2:
-
-    ```bash
-    wget https://urm.nvidia.com/artifactory/sw-bmc-generic-local/BF2/BF2BMC-24.01-5/OPN/bf2-bmc-ota-24.01-5-opn.tar
-    ```
-
-    Bluefield 3:
-
-    ```bash
-    wget https://urm.nvidia.com/artifactory/sw-bmc-generic-local/BF3/BF3BMC-24.01-5/OPN/bf3-bmc-24.01-5_opn.fwpkg
-    ```
+    BlueField 3: download the `bf3-bmc-<version>_opn.fwpkg` package
 
 2. Copy the firmware package to the staging server for the site
 3. Set up IP, password and token environment variables:
@@ -256,13 +244,13 @@ For the examples below, we are installing FW version 24.01-5, but confirm this w
 
 4. Initiate the DPU BMC FW Upgrade:
 
-    Bluefield 2:
+    BlueField 2:
 
     ```bash
     curl -k -H "X-Auth-Token: $BMCTOKEN" -H "Content-Type: application/octet-stream" -X POST -T bf2-bmc-ota-24.01-5-opn.tar https://$DPUBMCIP/redfish/v1/UpdateService/update
     ```
 
-    Bluefield 3:
+    BlueField 3:
 
     ```bash
     curl -k -H "X-Auth-Token: $BMCTOKEN" -H "Content-Type: application/octet-stream" -X POST -T bf3-bmc-24.01-5_opn.fwpkg https://$DPUBMCIP/redfish/v1/UpdateService/update
@@ -298,7 +286,7 @@ For the examples below, we are installing FW version 24.01-5, but confirm this w
 
 7. Once the DPU BMC has rebooted, retrieve a new BMC Token and check the installed firmware version:
 
-    Bluefield 2:
+    BlueField 2:
 
     ```bash
     export BMCTOKEN=`curl -k -H "Content-Type: application/json" -X POST https://$DPUBMCIP/login -d "{\"username\": \"root\", \"password\": \"$BMCPASS\"}" | grep token | awk '{print $2;}' | tr -d '"'`
@@ -309,7 +297,7 @@ For the examples below, we are installing FW version 24.01-5, but confirm this w
 
     ```
 
-    Bluefield 3:
+    BlueField 3:
 
     ```bash
     export BMCTOKEN=`curl -k -H "Content-Type: application/json" -X POST https://$DPUBMCIP/login -d "{\"username\": \"root\", \"password\": \"$BMCPASS\"}" | grep token | awk '{print $2;}' | tr -d '"'`
@@ -319,7 +307,7 @@ For the examples below, we are installing FW version 24.01-5, but confirm this w
 
 ## DPU ARM OS: Checking Secure Boot Status
 
-To successfully boot from the Forge BFB image, the DPU ARM OS needs to have Secure Boot disabled and configured for HTTP PXE boot.
+To successfully boot from the NICo BFB image, the DPU ARM OS needs to have Secure Boot disabled and configured for HTTP PXE boot.
 
 ### Check current secure boot settings
 
@@ -401,12 +389,12 @@ To disable if Secure Boot if it is enabled:
 
 If the "SecureBootCurrentBoot" setting is not shown, attempt to install DOCA 2.5.0:
 
-1. Download the BFB image on the staging server:
+1. Download the DOCA 2.5.0 BFB image from the NVIDIA DOCA download portal onto the staging server:
 
     ```bash
     mkdir DOCA
     cd DOCA
-    wget https://image.azure.nvmetal.net/mirror/forge/DOCA_2.5.0_BSP_4.5.0_Ubuntu_22.04-1.23-10.prod.bfb --no-check-certificate
+    # Download DOCA_2.5.0_BSP_4.5.0_Ubuntu_22.04-1.23-10.prod.bfb from the NVIDIA DOCA download portal
     ```
 
 2. Install the BFB image to the DPU ARM OS via the DPU BMC from the server with the BFB image:

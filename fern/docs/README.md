@@ -74,7 +74,7 @@ controller nodes.
 
 #### Site Management
 
-- The entry point for the managed site is through the Elektra site agent.
+- The entry point for the managed site is through the site agent.
   The site agent maintains a northbound Temporal connection to the cloud control plane for command and control.
 - The admin CLI provides a command line interface into NICo.
 
@@ -94,7 +94,7 @@ pods:
 ### Managed Hosts
 
 The point of having a site controller is to administer a site that has been populated with managed hosts.
-Each managed host is a pairing of a single Bluefield (BF) 2/3 DPU and a host server.
+Each managed host is a pairing of a single BlueField 2/3 DPU and a host server.
 During initial deployment, the `scout` service runs, informing the NICo API of any discovered DPUs. NICo completes the installation of services on the DPU and boots into regular operation mode. Thereafter, the `dpu-agent` starts as a daemon.
 
 Each DPU runs the `dpu-agent` which connects via gRPC to the API service in NICo to get configuration
