@@ -2,9 +2,9 @@
 
 This document contains release notes for the NCX Infra Controller (NICo) project.
 
-## Bare Metal Manager 0.2.0
+## NCX Infra Controller 0.2.0
 
-This release of Bare Metal Manager is open-source software (OSS).
+This release of NCX Infra Controller (NICo) is open-source software (OSS).
 
 ### Improvements
 
@@ -27,7 +27,7 @@ This release of Bare Metal Manager is open-source software (OSS).
 
 - The above `nv-redfish` package update fixes a critical bug with the BMC cache, which caused multiple cache miss errors, preventing the health monitor from re-discovery of monitored entities.
 
-## Bare Metal Manager EA
+## NCX Infra Controller EA
 
 ### What This Release Enables
 

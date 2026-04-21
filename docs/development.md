@@ -22,7 +22,7 @@ environment.
 
 2. Install additional cargo utilities
 
-   `RUSTC_WRAPPER= cargo install cargo-watch cargo-make sccache mdbook@0.4.52 mdbook-plantuml@0.8.0 mdbook-mermaid@0.16.2`
+   `RUSTC_WRAPPER= cargo install cargo-watch cargo-make sccache`
 
 3. Install docker following these [directions](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository), then add yourself to the docker group: `sudo usermod -aG docker $USER` (otherwise, you must always `sudo` docker`).
 4. Install docker-compose using your system package manager
@@ -150,11 +150,9 @@ environment.
 
     `cargo make build-x86-build-container`
 
-19. Build the book locally
+19. Preview the Fern docs locally
 
-    `cargo make book`
-
-    Then bookmark `file:///$REPO_ROOT/public/index.html`.
+    Follow the [Fern CLI quickstart](https://buildwithfern.com/learn/cli/overview) to preview documentation changes locally.
 
 ## Checking your setup / Running Unit Tests
 
@@ -187,30 +185,23 @@ of options (VS Code, NeoVim etc), but CLion/IntelliJ is widely used.
 One thing to note regardless of what IDE you choose: if you're running on Linux DO NOT USE Snap or Flatpak versions of the software packages. These builds introduce a number
 of complications in the C lib linking between the IDE and your system and frankly it's not worth fighting.
 
-## Cross-compiling for aarch64 (rough notes)
+## Cross-compiling for aarch64
 
 The DPU has an ARM core. To build software that runs there such as `forge-dpu-agent` you need an ARM8 machine. QEMU/libvirt can provide that.
 
-Here's how I did it.
-
-One time build:
- - copy / edit the Docker file from https://gitlab-master.nvidia.com/grahamk/carbide/-/blob/trunk/dev/docker/Dockerfile.build-container-arm into `myarm/Dockerfile`.
- - delete these lines:
-```
- RUN /root/.cargo/bin/cargo install cargo-cache cargo-make mdbook@0.4.52 mdbook-plantuml@0.8.0 mdbook-mermaid@0.16.2 sccache && /root/.cargo/bin/cargo cache -r registry-index,registry-sources
- RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
- RUN cd /usr/local/bin && curl -fL https://getcli.jfrog.io | sh
-```
- - `docker build -t myarm myarm` # give it a cooler name
- - `docker run -it -v /home/user/src/carbide:/carbide myarm /bin/bash`
+One-time setup:
+ - Copy `dev/docker/Dockerfile.build-container-arm` from the repository into `myarm/Dockerfile`.
+ - Remove any lines that install tools not needed for cross-compilation (e.g. jfrog CLI).
+ - Build the container: `docker build -t myarm myarm`
+ - Start a shell: `docker run -it -v /path/to/ncx-infra-controller-core:/repo myarm /bin/bash`
 
 Daily usage:
  - `docker start <container id or name>`
  - `docker attach <container id or name>`
 
-Now that you're in the container go into `/carbide` and work normally (`cargo build --release`). The binary rust produces will be aarch64. You can `scp` it to a DPU and run it.
+Inside the container, navigate to `/repo` and build normally (`cargo build --release`). The resulting binary will be aarch64 and can be `scp`'d to a DPU.
 
-The build may hang the first time. I don't know why. Ctrl-C and try again. You may want to `docker commit` after it succeeds to update the image.
+If the build hangs on the first run, press Ctrl-C and retry. Run `docker commit` after a successful build to preserve the container state.
 
 Remember to `strip` before you scp so that scp goes faster. scp to DPU example (`nvinit` first): `scp -v -J grahamk@155.130.12.194 /home/graham/src/carbide/target/release/forge-dpu-agent ubuntu@10.180.198.23:.`
 

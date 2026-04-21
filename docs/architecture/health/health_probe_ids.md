@@ -84,7 +84,7 @@ Indicates that a BGP session with a top-of-rack (TOR) switch could not be establ
 
 ### `BgpPeeringRouteServer`
 
-Indicates that a BGP session with the route server that is part of the part of the Carbide control plane could not be established by a host/DPU.
+Indicates that a BGP session with the route server that is part of the NICo control plane could not be established by a host/DPU.
 
 ### `BgpStats`
 

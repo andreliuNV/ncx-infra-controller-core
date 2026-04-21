@@ -110,11 +110,11 @@ This section provides a high-level order of operations for installing components
 
    - **Temporal**: server up; register namespaces
 
-3.  Carbide core (forge‑system)
+3.  NICo core (forge‑system)
 
    - carbide-api and supporting services (DHCP/PXE/DNS/NTP as required)
 
-4.  Carbide REST components
+4.  NICo REST components
 
     - Deploy cloud‑api, cloud‑workflow (cloud‑worker & site‑worker), and cloud‑cert‑manager (credsmgr)
 

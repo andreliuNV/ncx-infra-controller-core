@@ -10,7 +10,7 @@ book/ - architecture of forge book.  aka "the book"
 
 dev/ - a catch all directory for things that are not code related but are used to support forge.  e.g. Dockerfiles, kubernetes yaml, etc.
 
-dhcp/ - kea dhcp plugin.  Forge uses ISC Kea for a dhcp event loop.  This code intercepts `DHCPDISCOVER`s from dhcp-relays and passes the info to carbide-api
+dhcp/ - kea dhcp plugin.  NICo uses ISC Kea for a dhcp event loop.  This code intercepts `DHCPDISCOVER`s from dhcp-relays and passes the info to carbide-api
 
 dhcp-server/ - DHCP Server written in Rust. This server runs on the DPU and serves Host DHCP requests
 

@@ -12,9 +12,9 @@
 
 # **1\. Introduction**
 
-This design document specifies how the Bare Metal Manager project will integrate the SPIFFE identity framework to issue and manage machine identities using SPIFFE Verifiable Identity Documents (SVIDs). SPIFFE provides a vendor-agnostic standard for service identity that enables cryptographically verifiable identities for workloads, removing reliance on static credentials and supporting zero-trust authentication across distributed systems.
+This design document specifies how NCX Infra Controller (NICo) will integrate the SPIFFE identity framework to issue and manage machine identities using SPIFFE Verifiable Identity Documents (SVIDs). SPIFFE provides a vendor-agnostic standard for service identity that enables cryptographically verifiable identities for workloads, removing reliance on static credentials and supporting zero-trust authentication across distributed systems.
 
-The document outlines the architecture, data models, APIs, security considerations, and interactions between Bare Metal Manager components and SPIFFE-compliant systems.
+The document outlines the architecture, data models, APIs, security considerations, and interactions between NICo components and SPIFFE-compliant systems.
 
 ## **1.1 Purpose**
 
@@ -24,7 +24,7 @@ The purpose of this document is to articulate the design of the software system,
 
 | Term/Acronym | Definition |
 | :---- | :---- |
-| Carbide | NVIDIA bare-metal life-cycle management system (project name: Bare metal manager) |
+| Carbide | NCX Infra Controller (NICo) — NVIDIA bare-metal lifecycle management system |
 | SDD | Software Design Document |
 | API | Application Programming Interface |
 | Tenant | A Carbide client/org/account that provisions/manages BM nodes through Carbide APIs. |
