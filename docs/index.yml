@@ -38,17 +38,35 @@ navigation:
           path: getting-started/quickstart.md
         - page: Deployment Options
           path: getting-started/deployment-options.md
+        - page: Site Setup
+          path: getting-started/site-setup.md
+        - page: Networking Requirements
+          path: getting-started/networking-requirements.md
+        - page: Building NICo Containers
+          path: getting-started/building-containers.md
+        - section: Kubernetes
+          contents:
+            - page: Bootstrap New Cluster
+              path: getting-started/kubernetes-bootstrap.md
+            - page: TLS
+              path: getting-started/kubernetes-tls.md
 
     - section: Architecture
       contents:
         - page: System Architecture
           path: architecture/overview.md
+        - page: Site Reference Architecture
+          path: architecture/site-reference-arch.md
+        - page: Components
+          path: architecture/components.md
         - page: Redfish Workflow
           path: architecture/redfish_workflow.md
         - page: Redfish Endpoints Reference
           path: architecture/redfish/endpoints_reference.md
         - page: Reliable State Handling
           path: architecture/state_handling.md
+        - page: Networking Integrations
+          path: architecture/networking_integrations.md
         - page: DPU Configuration
           path: architecture/dpu_configuration.md
         - page: Health Checks and Health Aggregation
@@ -76,8 +94,16 @@ navigation:
       contents:
         - page: Hardware Discovery and Inventory
           path: provisioning/hardware-discovery.md
+        - page: Ingesting Hosts
+          path: provisioning/ingesting-machines.md
+        - page: Machine Validation
+          path: provisioning/machine-validation.md
+        - page: SKU Validation
+          path: provisioning/sku-validation.md
         - page: DPU Lifecycle Management
           path: provisioning/dpu-lifecycle.md
+        - page: DPU Operations
+          path: provisioning/dpu-operations.md
         - page: Host Provisioning
           path: provisioning/host-provisioning.md
         - page: IP and Network Setup
@@ -89,6 +115,14 @@ navigation:
       contents:
         - page: Network Isolation
           path: configuration/network-isolation.md
+        - page: NVLink Partitioning
+          path: configuration/nvlink-partitioning.md
+        - section: VPC Management
+          contents:
+            - page: VPC Routing Profiles
+              path: configuration/vpc-routing-profiles.md
+            - page: VPC Peering
+              path: configuration/vpc-peering.md
         - page: Tenant Management
           path: configuration/tenant-management.md
         - page: Configurability
@@ -100,12 +134,18 @@ navigation:
       contents:
         - page: Monitoring and Health
           path: operations/monitoring-health.md
+        - page: Core Metrics
+          path: operations/core-metrics.md
         - page: Firmware Updates
           path: operations/firmware-updates.md
+        - page: Updating Expected Hosts Manifest
+          path: operations/expected-machine-update.md
         - page: Tenant Lifecycle
           path: operations/tenant-lifecycle.md
         - page: Break-Fix
           path: operations/break-fix.md
+        - page: Break-Fix Integration
+          path: operations/break-fix-integration.md
         - page: Capacity Management
           path: operations/capacity-management.md
         - page: Troubleshooting
@@ -174,18 +214,20 @@ navigation:
           path: bootable_artifacts.md
         - page: Local Development
           path: development.md
+        - page: Building Containers via Docker on macOS
+          path: development/cargo-via-docker-macos.md
         - page: Running a PXE Client in a VM
           path: development/vm_pxe_client.md
         - page: Re-creating Issuer/CA in Local Dev
           path: development/issuer_ca_recreate.md
         - page: Visual Studio Code Remote Development
           path: development/vscode_remote.md
+        - page: Adding Support for New Hardware
+          path: development/new_hardware_support.md
         - section: Database
           contents:
             - page: Data Model / DB Schema
               path: development/schema.md
-        - page: Adding Support for New Hardware
-          path: development/new_hardware_support.md
 
   - tab: api
     layout:
