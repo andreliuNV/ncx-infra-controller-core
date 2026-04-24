@@ -30,28 +30,18 @@ navigation:
 
     - section: Getting Started
       contents:
-        - page: Site Reference Architecture
-          path: manuals/site-reference-arch.md
-        - page: Site Setup
-          path: manuals/site-setup.md
-        - page: Networking Requirements
-          path: manuals/networking_requirements.md
-        - page: Building NICo Containers
-          path: manuals/building_nico_containers.md
-        - page: Ingesting Hosts
-          path: manuals/ingesting_machines.md
-        - page: Updating Expected Hosts Manifest
-          path: manuals/expected_machine_update.md
-        - section: Kubernetes
-          contents:
-            - page: Bootstrap New Cluster
-              path: kubernetes/bootstrap.md
-            - page: TLS
-              path: kubernetes/tls.md
+        - page: System Requirements
+          path: getting-started/system-requirements.md
+        - page: Prerequisites
+          path: getting-started/prerequisites.md
+        - page: Quick Start Guide
+          path: getting-started/quickstart.md
+        - page: Deployment Options
+          path: getting-started/deployment-options.md
 
     - section: Architecture
       contents:
-        - page: Overview and Components
+        - page: System Architecture
           path: architecture/overview.md
         - page: Redfish Workflow
           path: architecture/redfish_workflow.md
@@ -59,8 +49,6 @@ navigation:
           path: architecture/redfish/endpoints_reference.md
         - page: Reliable State Handling
           path: architecture/state_handling.md
-        - page: Networking Integrations
-          path: architecture/networking_integrations.md
         - page: DPU Configuration
           path: architecture/dpu_configuration.md
         - page: Health Checks and Health Aggregation
@@ -84,55 +72,99 @@ navigation:
             - page: Rack State Machine
               path: architecture/state_machines/rack.md
 
-    - section: Operations
+    - section: Provisioning Guide (Day 0)
       contents:
-        - page: Host Validation
-          path: manuals/machine_validation.md
-        - page: SKU Validation
-          path: manuals/sku_validation.md
-        - page: NVLink Partitioning
-          path: manuals/nvlink_partitioning.md
-        - page: Release Instance API Enhancements
-          path: manuals/breakfix_integration.md
-        - page: BlueField DPU Operations
-          path: dpu-operations.md
-        - section: Managing VPCs
-          contents:
-            - page: VPC Routing Profiles
-              path: manuals/vpc/vpc_routing_profiles.md
-            - page: VPC Peering
-              path: manuals/vpc/vpc_peering_management.md
-        - section: Metrics
-          contents:
-            - page: Core Metrics
-              path: manuals/metrics/core_metrics.md
+        - page: Hardware Discovery and Inventory
+          path: provisioning/hardware-discovery.md
+        - page: DPU Lifecycle Management
+          path: provisioning/dpu-lifecycle.md
+        - page: Host Provisioning
+          path: provisioning/host-provisioning.md
+        - page: IP and Network Setup
+          path: provisioning/ip-network-setup.md
+        - page: Attestation and Security
+          path: provisioning/attestation-security.md
 
-    - section: Playbooks
+    - section: Configuration Guide (Day 1)
       contents:
-        - page: Azure OIDC for NCX Infra Controller Web UI
-          path: playbooks/carbide_web_oauth2.md
-        - page: Force Deleting and Rebuilding Hosts
-          path: playbooks/force_delete.md
-        - page: Rebooting a Machine
-          path: playbooks/machine_reboot.md
-        - page: InfiniBand Setup
-          path: playbooks/ib_runbook.md
-        - section: Stuck Objects
+        - page: Network Isolation
+          path: configuration/network-isolation.md
+        - page: Tenant Management
+          path: configuration/tenant-management.md
+        - page: Configurability
+          path: configuration/configurability.md
+        - page: Integration with External Systems
+          path: configuration/integration.md
+
+    - section: Operations Guide (Day 2)
+      contents:
+        - page: Monitoring and Health
+          path: operations/monitoring-health.md
+        - page: Firmware Updates
+          path: operations/firmware-updates.md
+        - page: Tenant Lifecycle
+          path: operations/tenant-lifecycle.md
+        - page: Break-Fix
+          path: operations/break-fix.md
+        - page: Capacity Management
+          path: operations/capacity-management.md
+        - page: Troubleshooting
+          path: operations/troubleshooting.md
+        - section: Playbooks
           contents:
-            - page: Overview and General Troubleshooting
-              path: playbooks/stuck_objects/stuck_objects.md
-            - page: Common Mitigations
-              path: playbooks/stuck_objects/common_mitigations.md
-            - page: Stuck in WaitingForNetworkConfig and DPU Health
-              path: playbooks/stuck_objects/waiting_for_network_config.md
-            - page: Adding New Machines to an Existing Site
-              path: playbooks/stuck_objects/adding_new_machines.md
-            - page: Troubleshooting noDpuLogsWarning Alerts
-              path: playbooks/troubleshooting_noDpuLogsWarning_alerts.md
-        - section: Debugging Machine
-          contents:
-            - page: Collecting Debug Bundles
-              path: playbooks/debugging_machine/debug_bundle.md
+            - page: Azure OIDC for NCX Infra Controller Web UI
+              path: playbooks/carbide_web_oauth2.md
+            - page: Force Deleting and Rebuilding Hosts
+              path: playbooks/force_delete.md
+            - page: Rebooting a Machine
+              path: playbooks/machine_reboot.md
+            - page: InfiniBand Setup
+              path: playbooks/ib_runbook.md
+            - section: Stuck Objects
+              contents:
+                - page: Overview and General Troubleshooting
+                  path: playbooks/stuck_objects/stuck_objects.md
+                - page: Common Mitigations
+                  path: playbooks/stuck_objects/common_mitigations.md
+                - page: Stuck in WaitingForNetworkConfig and DPU Health
+                  path: playbooks/stuck_objects/waiting_for_network_config.md
+                - page: Adding New Machines to an Existing Site
+                  path: playbooks/stuck_objects/adding_new_machines.md
+                - page: Troubleshooting noDpuLogsWarning Alerts
+                  path: playbooks/troubleshooting_noDpuLogsWarning_alerts.md
+            - section: Debugging Machine
+              contents:
+                - page: Collecting Debug Bundles
+                  path: playbooks/debugging_machine/debug_bundle.md
+
+    - section: API Reference
+      contents:
+        - page: REST API Reference
+          path: api/rest-api.md
+        - page: gRPC API Reference
+          path: api/grpc-api.md
+        - page: CLI Reference
+          path: api/cli-reference.md
+
+    - section: Reference
+      contents:
+        - page: Hardware Compatibility List
+          path: hcl.md
+        - page: Glossary
+          path: glossary.md
+        - page: FAQs
+          path: faq.md
+        - page: Release Notes
+          path: release-notes.md
+
+    - section: Resources
+      contents:
+        - page: Contributing
+          path: resources/contributing.md
+        - page: Getting Support
+          path: resources/getting-support.md
+        - page: Related Projects and Links
+          path: resources/related-projects.md
 
     - section: Development
       contents:
@@ -154,17 +186,6 @@ navigation:
               path: development/schema.md
         - page: Adding Support for New Hardware
           path: development/new_hardware_support.md
-
-    - section: Reference
-      contents:
-        - page: Hardware Compatibility List
-          path: hcl.md
-        - page: Release Notes
-          path: release-notes.md
-        - page: FAQs
-          path: faq.md
-        - page: Glossary
-          path: glossary.md
 
   - tab: api
     layout:
